@@ -18,7 +18,7 @@ func main() {
 	}
 
 	go func() {
-		for i := 1; i < maxPort; i++ {
+		for i := 1; i <= maxPort; i++ {
 			ports <- i
 		}
 	}()
@@ -32,10 +32,12 @@ func main() {
 
 	close(ports)
 	close(results)
+
 	sort.Ints(openports)
 	for _, port := range openports {
-		fmt.Printf("%d open/n", port)
+		fmt.Printf("%d open\n", port)
 	}
+	fmt.Println("Process complete")
 }
 
 func worker(ports, results chan int) {
